@@ -15,6 +15,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
+    protected $userNamespace = 'App\Http\Controllers\User';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -37,7 +38,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
 
-        $this->mapWebRoutes();
+        $this->mapUserRoutes();
 
         //
     }
@@ -49,11 +50,11 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapWebRoutes()
+    protected function mapUserRoutes()
     {
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
+        Route::middleware('user')
+             ->namespace($this->userNamespace)
+             ->group(base_path('routes/user.php'));
     }
 
     /**
