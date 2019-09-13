@@ -16,6 +16,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected $namespace = 'App\Http\Controllers';
     protected $userNamespace = 'App\Http\Controllers\User';
+    protected $adminNamespace = 'App\Http\Controllers\Admin';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -40,7 +41,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapUserRoutes();
 
-        //
+        $this->mapAdminRoutes();
     }
 
     /**
@@ -55,6 +56,15 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('user')
              ->namespace($this->userNamespace)
              ->group(base_path('routes/user.php'));
+    }
+
+    protected function mapAdminRoutes()
+    {
+        Route::prefix('admin')
+            ->name('admin.')
+            ->middleware('admin')
+            ->namespace($this->adminNamespace)
+            ->group(base_path('routes/admin.php'));
     }
 
     /**
