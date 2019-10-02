@@ -23,13 +23,16 @@ Route::get('test-auth-api-session', function () {
     return view('user.test-auth-api-session');
 });
 
-Route::group([
+Route::group(
+    [
         'prefix' => 'api',
         'middleware' => ['auth'],
-    ], function () {
-    Route::post('test-auth-use-session', function () {
-        return response()->json([
-            'message' => 'This is a result!'
-        ], 200);
-    });
-});
+    ],
+    function () {
+        Route::post('test-auth-use-session', function () {
+            return response()->json([
+                'message' => 'This is a result!'
+            ], 200);
+        });
+    }
+);
