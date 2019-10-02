@@ -18,3 +18,18 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+
+Route::get('test-auth-api-session', function () {
+    return view('user.test-auth-api-session');
+});
+
+Route::group([
+        'prefix' => 'api',
+        'middleware' => ['auth'],
+    ], function () {
+    Route::post('test-auth-use-session', function () {
+        return response()->json([
+            'message' => 'This is a result!'
+        ], 200);
+    });
+});
